@@ -130,21 +130,26 @@ class _LoopiaClient:
             logger.debug('Error getting DNS records: %s', e)
             return
 
+        matching_records, other_records = [], []
         for record in domain_records:
-            if record['type'] != 'TXT' or record['rdata'] != record_content:
-                continue
+            hit = record['type'] == 'TXT' and record['rdata'] == record_content
+            (matching_records if hit else other_records).append(record)
+
+        if not other_records:
+            logger.debug('Removing subdomain %s', subdomain)
             try:
-                record_id = record['record_id']
-                logger.debug('Removing TXT record %s', record_id)
+                self.remove_subdomain(domain, subdomain)
+                return
+            except LoopiaError as e:
+                logger.debug('Error removing subdomain %s: %s', subdomain, e)
+
+        for record in matching_records:
+            record_id = record['record_id']
+            logger.debug('Removing TXT record %s', record_id)
+            try:
                 self.remove_zone_record(domain, subdomain, record_id)
             except LoopiaError as e:
                 logger.warning('Error deleting TXT record %s: %s', record_id, e)
-
-        try:
-            if not self.get_zone_records(domain, subdomain):
-                self.remove_subdomain(domain, subdomain)
-        except LoopiaError as e:
-            logger.debug('Error cleaning up subdomain %s: %s', subdomain, e)
 
     def _find_domain(self, domain_name):
         domain_name_guesses = dns_common.base_domain_name_guesses(domain_name)
