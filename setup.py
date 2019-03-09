@@ -12,6 +12,7 @@ setup(
     url='https://www.github.com/rgson/certbot-dns-loopia',
     author='Robin Gustafsson',
     author_email='robin@rgson.se',
+    license='Apache License 2.0',
     packages=find_packages(),
     install_requires=open('requirements.txt').readlines(),
     entry_points={
@@ -23,6 +24,7 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Plugins',
         'Intended Audience :: System Administrators',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
