@@ -10,11 +10,20 @@ records using the Loopia DNS API.
 The plugin is enabled by passing the `--dns-loopia` option to `certbot`.
 For details, refer to [Certbot's documentation](https://certbot.eff.org/docs/using.html#dns-plugins).
 
-Example:
+Examples:
 
 ```sh
+# Obtaining a certificate for example.com
 certbot certonly -d example.com \
   --certbot-dns-loopia:dns-loopia \
+  --certbot-dns-loopia:dns-loopia-credentials ~/.secrets/certbot/loopia.ini
+```
+
+```sh
+# Obtaining a wildcard certificate for example.com and setting it up for Apache
+certbot -d example.com -d '*.example.com' \
+  --server 'https://acme-v02.api.letsencrypt.org/directory' \
+  -i apache -a certbot-dns-loopia:dns-loopia \
   --certbot-dns-loopia:dns-loopia-credentials ~/.secrets/certbot/loopia.ini
 ```
 
