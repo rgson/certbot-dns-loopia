@@ -1,0 +1,31 @@
+Source: certbot-dns-loopia
+Section: python
+Priority: optional
+Maintainer: Robin Gustafsson <robin@rgson.se>
+Build-Depends: debhelper (>= 10), dh-python, python-all, python-setuptools, python3-all, python3-setuptools
+Standards-Version: 4.1.2
+Homepage: https://github.com/rgson/certbot-dns-loopia
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.2
+Vcs-Git: https://github.com/rgson/certbot-dns-loopia -b debian
+Vcs-Browser: https://github.com/rgson/certbot-dns-loopia/tree/debian
+
+Package: python-certbot-dns-loopia
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}
+Description: Loopia DNS Authenticator for Certbot (Python 2)
+ The Loopia DNS Authenticator plugin for Certbot automates the process of
+ completing a dns-01 challenge by creating, and subsequently removing, TXT
+ records using the Loopia DNS API.
+ .
+ This package installs the library for Python 2.
+
+Package: python3-certbot-dns-loopia
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends}
+Description: Loopia DNS Authenticator for Certbot (Python 3)
+ The Loopia DNS Authenticator plugin for Certbot automates the process of
+ completing a dns-01 challenge by creating, and subsequently removing, TXT
+ records using the Loopia DNS API.
+ .
+ This package installs the library for Python 3.
