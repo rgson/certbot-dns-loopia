@@ -14,15 +14,16 @@ Example:
 
 ```sh
 certbot certonly -d example.com \
-  --dns-loopia --dns-loopia-credentials ~/.secrets/certbot/loopia.ini
+  --certbot-dns-loopia:dns-loopia \
+  --certbot-dns-loopia:dns-loopia-credentials ~/.secrets/certbot/loopia.ini
 ```
 
 ### Arguments
 
-- `--dns-loopia-credentials`:
+- `--certbot-dns-loopia:dns-loopia-credentials`:
   Loopia API credentials INI file. (Required)
 
-- `--dns-loopia-propagation-seconds`:
+- `--certbot-dns-loopia:dns-loopia-propagation-seconds`:
   The number of seconds to wait for DNS to propagate before asking the ACME
   server to verify the DNS record. (Default: 10)
 
@@ -31,13 +32,14 @@ certbot certonly -d example.com \
 
 Use of this plugin requires a configuration file containing Loopia API
 credentials, obtained from the Loopia control panel. The path to this file can
-be provided using the `--dns-loopia-credentials` command-line argument.
+be provided using the `--certbot-dns-loopia:dns-loopia-credentials` command-line
+argument.
 
 Example:
 
 ```ini
-dns_loopia_username = bob@loopiaapi
-dns_loopia_password = mCaof9jCfImg6yxA
+certbot_dns_loopia:dns_loopia_username = bob@loopiaapi
+certbot_dns_loopia:dns_loopia_password = mCaof9jCfImg6yxA
 ```
 
 The API credentials must have permission to perform the following API calls:
